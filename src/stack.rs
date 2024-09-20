@@ -1,31 +1,47 @@
 pub struct Stack<T> {
     top: Option<Box<Node<T>>>,
+    len: u32,
 }
 
 struct Node<T> {
     data: T,
-    prev: Box<Node<T>>,
+    prev: Option<Box<Node<T>>>,
 }
 
 impl<T> Stack<T> {
     pub fn new() -> Stack<T> {
-        Stack {
-            top: None,
+        Stack { top: None, len: 0 }
+    }
+    pub fn push(&mut self, data: T) {
+        let node = Some(Box::new(Node {
+            data,
+            prev: self.top.take(),
+        }));
+        self.top = node;
+        self.len += 1;
+    }
+
+    pub fn pop(&mut self) {
+        // Beginner ownership explination:
+        // node in this case takes ownership of the self.top Node ('take()' changes it to borrowed)
+        if let Some(node) = self.top.take() {
+            self.top = node.prev;
+            self.len -= 1;
         }
     }
-    fn push(&mut self, data: T) {
+
+    pub fn peek(&self) -> Option<&T> {
+        match &self.top {
+            Some(node) => Some(&node.data),
+            None => None,
+        }
     }
 
-    fn pop(&mut self) {
+    pub fn is_empty(&self) -> bool {
+        self.len == 0
     }
 
-    fn peek(&self) {
-    }
-
-    fn is_empty(&self) {
-    }
-
-    fn quantity(&self) {
-
+    pub fn quantity(&self) -> u32 {
+        self.len
     }
 }
