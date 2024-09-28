@@ -6,10 +6,9 @@
 use std::rc::Rc;
 use std::cell::RefCell;
 
-
 pub struct Queue<T> {
     first: Option<Rc<RefCell<Node<T>>>>,
-    back: Option<Rc<RefCell<Node<T>>>>,
+    rear: Option<Rc<RefCell<Node<T>>>>,
     size: u32,
 }
 
@@ -22,7 +21,7 @@ impl<T> Queue<T> {
     pub fn new() -> Self {
         Queue {
             first: None,
-            back: None,
+            rear: None,
             size: 0,
         }
     }
@@ -33,14 +32,14 @@ impl<T> Queue<T> {
             next: None,
         }));
 
-        match self.back.take() {
+        match self.rear.take() {
             Some(old_back) => {
                 old_back.borrow_mut().next = Some(Rc::clone(&new_node));
-                self.back = Some(new_node);
+                self.rear = Some(new_node);
             }
             None => {
                 self.first = Some(Rc::clone(&new_node));
-                self.back = Some(new_node);
+                self.rear = Some(new_node);
             }
         }
 
@@ -52,7 +51,7 @@ impl<T> Queue<T> {
             if let Some(new_first) = old_first.borrow_mut().next.take() {
                 self.first = Some(new_first);
             } else {
-                self.back = None;
+                self.rear = None;
             }
             self.size -= 1;
             Rc::try_unwrap(old_first).ok().unwrap().into_inner().data

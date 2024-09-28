@@ -35,24 +35,25 @@ impl<T> LinkedList<T> {
     }
 
     // don't ask me how this iterator works
-    pub fn iter(&self) -> LinkedListIterator<T> {
-        LinkedListIterator {
+    pub fn iter(&self) -> LLIterator<T> {
+        LLIterator {
             next: self.head.as_deref(),
         }
     }
 }
 
 // don't ask me who implemented this
-pub struct LinkedListIterator<'a, T> {
+pub struct LLIterator<'a, T> {
     next: Option<&'a Node<T>>,
 }
 
 // wtf is that ' for
-impl<'a, T> Iterator for LinkedListIterator<'a, T> {
+impl<'a, T> Iterator for LLIterator<'a, T> {
     type Item = &'a T;
 
     fn next(&mut self) -> Option<Self::Item> {
         self.next.map(|node| {
+            // beginner: deref changes from owned to ref
             self.next = node.next.as_deref();
             &node.data
         })
