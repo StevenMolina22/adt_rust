@@ -1,7 +1,7 @@
 use std::iter::Iterator;
 
 #[derive(Debug)]
-pub struct Node<T>  {
+pub struct Node<T> {
     pub data: T,
     pub next: Option<Box<Node<T>>>,
 }
@@ -32,6 +32,15 @@ impl<T> LinkedList<T> {
                 current.next = Some(new_node);
             }
         }
+    }
+
+    pub fn pop(&mut self) -> Option<T> {
+        // take the head, replace it with None
+        // and return the head
+        self.head.take().map(|node| {
+            self.head = node.next;
+            node.data
+        })
     }
 
     // don't ask me how this iterator works

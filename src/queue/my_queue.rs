@@ -2,15 +2,15 @@ use std::{cell::RefCell, rc::Rc};
 
 #[derive(Debug)]
 pub struct Queue<T> {
-    pub size: u32,
-    pub front: Option<Rc<RefCell<Node<T>>>>,
-    pub back: Option<Rc<RefCell<Node<T>>>>,
+    size: u32,
+    front: Option<Rc<RefCell<Node<T>>>>,
+    back: Option<Rc<RefCell<Node<T>>>>,
 }
 
 #[derive(Debug)]
 pub struct Node<T> {
-    pub data: T,
-    pub next: Option<Rc<RefCell<Node<T>>>>,
+    data: T,
+    next: Option<Rc<RefCell<Node<T>>>>,
 }
 
 impl<T> Queue<T> {
@@ -39,7 +39,7 @@ impl<T> Queue<T> {
         self.size += 1;
     }
 
-    pub fn dequeue(&mut self) -> Option<T>{
+    pub fn dequeue(&mut self) -> Option<T> {
         if let Some(old_front) = self.front.take() {
             self.front = old_front.borrow_mut().next.take();
             if self.front.is_none() {
@@ -51,15 +51,18 @@ impl<T> Queue<T> {
         None
     }
 
+    pub fn peek(&self) -> Option<T>
+    where
+        T: Clone,
+    {
+        self.front.as_ref().map(|node| node.borrow().data.clone())
+    }
+
     pub fn is_empty(&self) -> bool {
         self.size == 0
     }
 
-    pub fn len(&self) -> u32 {
+    pub fn size(&self) -> u32 {
         self.size
     }
 }
-
-// impl Iterator for Queue {
-//     type Item = ;
-// }
