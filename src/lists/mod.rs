@@ -4,7 +4,7 @@ pub mod sorted;
 use linked::LinkedList;
 use sorted::SortedLinked;
 
-pub fn _use_sorted() {
+pub fn use_sorte_l() {
     println!("----- WELCOME TO SORTED LINKED LIST -----");
 
     let mut list = SortedLinked::new();
@@ -20,7 +20,7 @@ pub fn _use_sorted() {
     println!();
 }
 
-pub fn _use_linked() {
+pub fn use_list() {
     println!("----- WELCOME TO LINKED LIST -----");
 
     let mut list = LinkedList::new();
@@ -31,7 +31,7 @@ pub fn _use_linked() {
 
     println!("Linked list after appending 1, 2, 3:");
 
-    for value in list.iter() {
+    for value in list.iter().map(|x| x) {
         println!("Value: {}", value);
     }
     println!();

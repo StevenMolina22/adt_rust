@@ -1,7 +1,7 @@
 pub mod my_queue;
 pub mod queue;
 
-pub fn _use_my_queue() {
+pub fn use_queue() {
     println!("----- WELCOME TO MY QUEUE -----");
 
     let mut my_queue = my_queue::Queue::new();

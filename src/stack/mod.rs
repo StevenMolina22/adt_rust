@@ -2,7 +2,7 @@ use stack::Stack;
 
 pub mod stack;
 
-pub fn _use_stack() {
+pub fn use_stack() {
     println!("----- WELCOME TO STACK -----");
 
     let mut stack = Stack::new();

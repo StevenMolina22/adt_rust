@@ -6,7 +6,6 @@ pub struct Node<T> {
 pub struct SortedLinked<T> {
     head: Option<Box<Node<T>>>,
 }
-
 impl<T> SortedLinked<T> {
     pub fn new() -> SortedLinked<T> {
         SortedLinked { head: None }

@@ -2,7 +2,7 @@ use iter::Counter;
 
 pub mod iter;
 
-pub fn _use_my_iter() {
+pub fn use_my_iter() {
     println!("----- WELCOME TO MY ITER -----");
     let counter = Counter::new();
 
