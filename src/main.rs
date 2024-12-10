@@ -1,14 +1,15 @@
 use std::io;
 
 mod graphs;
+mod heap;
 mod iters;
 mod lists;
 mod queue;
 mod stack;
+mod trees;
 
 fn main() {
     show_options();
-
     let mut input = String::new();
     io::stdin().read_line(&mut input).expect("Failed to read");
     let input = input.trim();
@@ -63,7 +64,7 @@ impl Command {
             Command::Queue => queue::use_queue(),
             Command::List => lists::use_list(),
             Command::SortedList => lists::use_sorte_l(),
-            Command::Graph => graphs::use_graph(),
+            Command::Graph => graphs::use_graph_from(),
             Command::Invalid => println!("Invalid option. Please try again."),
         }
     }

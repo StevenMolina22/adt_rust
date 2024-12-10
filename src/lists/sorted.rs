@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 pub struct Node<T> {
     pub data: T,
     next: Option<Box<Node<T>>>,
