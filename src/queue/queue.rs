@@ -1,10 +1,11 @@
+#![allow(dead_code)]
 // its not trivial to implement a queue in rust
 // because multiple reference are needed for the same data
 // this shows the neccesity to use things like ref countint and ref cell
 
 // COPIED IMPLEMENTATION, JUST FOR REFERENCE
-use std::rc::Rc;
 use std::cell::RefCell;
+use std::rc::Rc;
 
 pub struct Queue<T> {
     first: Option<Rc<RefCell<Node<T>>>>,
@@ -27,10 +28,7 @@ impl<T> Queue<T> {
     }
 
     pub fn enqueue(&mut self, data: T) {
-        let new_node = Rc::new(RefCell::new(Node {
-            data,
-            next: None,
-        }));
+        let new_node = Rc::new(RefCell::new(Node { data, next: None }));
 
         match self.rear.take() {
             Some(old_back) => {

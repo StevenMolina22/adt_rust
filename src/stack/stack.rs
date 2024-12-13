@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 pub struct Stack<T> {
     top: Option<Box<Node<T>>>,
     len: u32,
