@@ -55,18 +55,6 @@ impl Graph {
     }
 
     pub fn has_edge(&mut self, from: u32, to: u32) -> bool {
-        // match self.edges.get(&from) {
-        //     None => false,
-        //     Some(neighbors) => {
-        //         for v in neighbors {
-        //             if *v == to {
-        //                 return true;
-        //             }
-        //         }
-        //         false
-        //     }
-        // }
-        //
         match self.edges.get(&from) {
             None => false,
             Some(neighbors) => neighbors.iter().any(|v| *v == to),

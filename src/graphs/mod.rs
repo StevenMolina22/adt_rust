@@ -1,6 +1,8 @@
+use generic::Graph as GenericGraph;
 use list::Graph as ListGraph;
 use matrix::Graph as MatrixGraph;
 
+pub mod generic;
 mod list;
 mod matrix;
 
@@ -25,4 +27,14 @@ pub fn use_graph_from() {
     g.add_edge(2, 4);
 
     println!("{}", ListGraph::from(g.edges()));
+}
+
+pub fn use_graph_generic() {
+    let mut g = GenericGraph::new();
+    g.add_edge("A", "C");
+    g.add_edge("A", "B");
+    g.add_edge("A", "A");
+    g.add_edge("B", "D");
+
+    println!("{}", g);
 }

@@ -64,7 +64,7 @@ impl Command {
             Command::Queue => queue::use_queue(),
             Command::List => lists::use_list(),
             Command::SortedList => lists::use_sorte_l(),
-            Command::Graph => graphs::use_graph_from(),
+            Command::Graph => graphs::use_graph_generic(),
             Command::Invalid => println!("Invalid option. Please try again."),
         }
     }
